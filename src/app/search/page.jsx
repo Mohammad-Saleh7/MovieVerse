@@ -1,4 +1,4 @@
-import MovieCard from "../components/MovieCard";
+import MovieCard from "../../components/MovieCard";
 import { searchMovies } from "@/lib/tmdb";
 
 export default async function SearchPage({ searchParams }) {

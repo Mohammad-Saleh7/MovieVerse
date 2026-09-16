@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { getMovieDetails } from "@/lib/tmdb";
+import FavoriteButton from "../components/FavoriteButton";
+import WatchlistButton from "../components/WatchlistButton";
 
 export default async function MovieDetailsPage({ params }) {
   const { id } = await params;
@@ -41,6 +43,10 @@ export default async function MovieDetailsPage({ params }) {
           <p className="max-w-2xl leading-7 text-muted-foreground">
             {movie.overview}
           </p>
+          <div className="flex gap-2">
+            <FavoriteButton />
+            <WatchlistButton />
+          </div>
         </div>
       </div>
     </main>
