@@ -2,18 +2,21 @@ import MovieCard from "@/app/components/MovieCard";
 
 const watchList = [
   {
+    id: 27205,
     title: "Inception",
     year: "2010",
     rating: "8.8",
     poster: "/movie.jpg",
   },
   {
+    id: 157336,
     title: "Interstellar",
     year: "2014",
     rating: "8.7",
     poster: "/movie.jpg",
   },
   {
+    id: 155,
     title: "The Dark Knight",
     year: "2008",
     rating: "9.0",
@@ -29,7 +32,7 @@ export default function WatchListPage() {
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {watchList.map((movie) => (
-            <MovieCard key={movie.title} {...movie} />
+            <MovieCard key={movie.id} {...movie} />
           ))}
         </div>
       </section>
