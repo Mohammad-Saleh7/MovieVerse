@@ -2,56 +2,106 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 
-import { Input } from "@/components/ui/input";
 import SearchHeader from "./Search";
+import NavLinks from "./NavLinks";
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  function closeMenu() {
+    setIsMenuOpen(false);
+  }
+
   return (
-    <header className="mt-5 flex w-full flex-col gap-5 md:flex-row md:items-center md:justify-between">
-      {/* Logo */}
-      <div className="flex items-center gap-3 justify-center ">
-        <Link href="/" className="shrink-0 ">
+    <header className="border-b py-5">
+      <div className="flex items-center justify-between gap-4">
+        {/* Logo */}
+        <Link
+          href="/"
+          onClick={closeMenu}
+          className="flex shrink-0 items-center gap-3"
+        >
           <Image
             src="/header-logo.jpg"
-            width={55}
-            height={55}
+            width={52}
+            height={52}
             alt="MovieVerse"
             className="rounded-full object-cover"
           />
+
+          <div className="h-10 w-px bg-border" />
+
+          <span className="text-xl font-bold tracking-tight">MovieVerse</span>
         </Link>
-        <div className="h-12 w-px bg-gray-950" />
-        <Link href={"/"}>
-          <h2>MovieVerse</h2>
-        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden items-center gap-x-5 text-sm font-medium lg:flex">
+          <NavLinks />
+
+          <Link
+            href="/profile"
+            className="rounded-md border px-3 py-1.5 transition-colors hover:bg-accent"
+          >
+            Profile
+          </Link>
+
+          <Link
+            href="/login"
+            className="rounded-md bg-primary px-3 py-1.5 text-primary-foreground transition-opacity hover:opacity-90"
+          >
+            Login
+          </Link>
+        </nav>
+
+        {/* Desktop Search */}
+        <div className="hidden lg:flex">
+          <SearchHeader />
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          type="button"
+          onClick={() => setIsMenuOpen((prev) => !prev)}
+          className="inline-flex items-center justify-center rounded-md border p-2 transition-colors hover:bg-accent lg:hidden"
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
 
-      {/* Navigation */}
-      <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-        <Link href="/" className="transition-colors hover:text-primary">
-          Home
-        </Link>
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="mt-5 border-t pt-5 lg:hidden">
+          <nav className="flex flex-col gap-2">
+            <NavLinks mobile onNavigate={closeMenu} />
 
-        <Link href="/movies" className="transition-colors hover:text-primary">
-          Movies
-        </Link>
+            <Link
+              href="/profile"
+              onClick={closeMenu}
+              className="rounded-md border px-3 py-2 text-sm font-medium transition-colors hover:bg-accent"
+            >
+              Profile
+            </Link>
 
-        <Link href="/tv-shows" className="transition-colors hover:text-primary">
-          TV Shows
-        </Link>
+            <Link
+              href="/login"
+              onClick={closeMenu}
+              className="rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              Login
+            </Link>
 
-        <Link href="/trending" className="transition-colors hover:text-primary">
-          Trending
-        </Link>
-
-        <Link href="/login" className="transition-colors hover:text-primary">
-          Login
-        </Link>
-      </nav>
-
-      {/* Search */}
-      <SearchHeader />
+            {/* Mobile Search */}
+            <div className="pt-2">
+              <SearchHeader />
+            </div>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

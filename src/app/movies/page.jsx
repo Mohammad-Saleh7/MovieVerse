@@ -18,6 +18,7 @@ export default async function MoviesPage() {
               year={movie.release_date?.slice(0, 4)}
               rating={movie.vote_average.toFixed(1)}
               poster={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              overview={movie.overview}
             />
           ))}
         </div>

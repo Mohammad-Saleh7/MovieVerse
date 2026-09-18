@@ -87,3 +87,17 @@ export async function searchMovies(query) {
 
   return response.json();
 }
+//////////////////////////////////////////////////
+export async function getFeaturedMovie() {
+  const response = await fetch(
+    `${TMDB_BASE_URL}/movie/popular?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch featured movie");
+  }
+
+  const data = await response.json();
+
+  return data.results?.[0] || null;
+}

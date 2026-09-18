@@ -18,6 +18,7 @@ export default async function TvShowsPage() {
               title={show.name}
               year={show.first_air_date?.slice(0, 4)}
               rating={show.vote_average.toFixed(1)}
+              overview={show.overview}
               poster={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
             />
           ))}
