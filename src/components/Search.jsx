@@ -1,27 +1,43 @@
 "use client";
 
 import { Input } from "@base-ui/react";
-import { Search } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { Search, X } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function SearchHeader() {
   const router = useRouter();
-  const [query, setQuery] = useState("");
+  const searchParams = useSearchParams();
+
+  const currentQuery = searchParams.get("q") || "";
+  const [query, setQuery] = useState(currentQuery);
+
+  useEffect(() => {
+    setQuery(currentQuery);
+  }, [currentQuery]);
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!query.trim()) return;
+    const trimmedQuery = query.trim();
 
-    router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+    if (!trimmedQuery) return;
+
+    router.push(`/search?q=${encodeURIComponent(trimmedQuery)}`);
+  }
+
+  function handleClear() {
+    setQuery("");
   }
 
   return (
-    <form onSubmit={handleSubmit} className="relative w-full md:w-64 lg:w-72">
+    <form
+      onSubmit={handleSubmit}
+      className="group relative w-full md:w-72 lg:w-80"
+    >
       <Search
         size={18}
-        className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+        className="pointer-events-none absolute left-3.5 top-1/2 z-10 -translate-y-1/2 text-muted-foreground transition-colors duration-200 group-focus-within:text-primary"
       />
 
       <Input
@@ -29,8 +45,18 @@ export default function SearchHeader() {
         placeholder="Search movies..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="w-full pl-10"
+        className="h-10 w-full rounded-full border-border/60 bg-muted/40 pl-10 pr-10 text-sm shadow-sm transition-all duration-200 placeholder:text-muted-foreground/70 hover:border-border hover:bg-muted/60 focus:border-black focus:ring-2 focus:ring-black/10 [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none"
       />
+      {query && (
+        <button
+          type="button"
+          onClick={handleClear}
+          aria-label="Clear search"
+          className="absolute right-3 top-1/2 z-10 flex size-6 -translate-y-1/2 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+        >
+          <X size={15} />
+        </button>
+      )}
     </form>
   );
 }
