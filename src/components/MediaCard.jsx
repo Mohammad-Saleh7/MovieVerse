@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const FALLBACK_POSTER = "/images/poster-placeholder.png";
 
-export default function MovieCard({
+export default function MediaCard({
   id,
   title,
   year,
@@ -44,11 +44,13 @@ export default function MovieCard({
 
           <div className="flex items-center justify-between text-sm text-muted-foreground">
             <span>{year ?? "—"}</span>
+
             <span className="flex items-center gap-1 font-medium">
               <Star className="size-4 fill-yellow-400 text-yellow-400" />
               {rating ? Number(rating).toFixed(1) : "N/A"}
             </span>
           </div>
+
           <p className="line-clamp-2 text-sm leading-6 text-muted-foreground">
             {overview || "No overview available."}
           </p>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import MovieCard from "@/components/MovieCard";
+import MediaCard from "@/components/MediaCard";
 
 export default function WatchListPage() {
   const [watchlist, setWatchlist] = useState([]);
@@ -29,7 +29,7 @@ export default function WatchListPage() {
               const isTvShow = Boolean(item.name);
 
               return (
-                <MovieCard
+                <MediaCard
                   key={item.id}
                   id={item.id}
                   title={item.title || item.name}

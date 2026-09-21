@@ -1,4 +1,4 @@
-import MovieCard from "../../components/MovieCard";
+import MediaCard from "@/components/MediaCard";
 import { getPopularMovies } from "@/lib/tmdb";
 
 export default async function MoviesPage() {
@@ -11,7 +11,7 @@ export default async function MoviesPage() {
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {data.results.map((movie) => (
-            <MovieCard
+            <MediaCard
               key={movie.id}
               id={movie.id}
               title={movie.title}

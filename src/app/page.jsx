@@ -1,5 +1,5 @@
 import Hero from "./components/Hero";
-import MovieCard from "@/components/MovieCard";
+import MediaCard from "@/components/MediaCard";
 import {
   getFeaturedMovie,
   getPopularMovies,
@@ -35,7 +35,7 @@ export default async function HomePage() {
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {trendingMovies.results.slice(0, 4).map((movie) => (
-            <MovieCard
+            <MediaCard
               key={movie.id}
               id={movie.id}
               title={movie.title}
@@ -66,7 +66,7 @@ export default async function HomePage() {
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {popularMovies.results.slice(0, 4).map((movie) => (
-            <MovieCard
+            <MediaCard
               key={movie.id}
               id={movie.id}
               title={movie.title}
@@ -97,7 +97,7 @@ export default async function HomePage() {
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {popularTvShows.results.slice(0, 4).map((show) => (
-            <MovieCard
+            <MediaCard
               key={show.id}
               id={show.id}
               title={show.name}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import MovieCard from "@/components/MovieCard";
+import MediaCard from "@/components/MediaCard";
 
 export default function FavoritesList() {
   const [favorites, setFavorites] = useState([]);
@@ -28,7 +28,7 @@ export default function FavoritesList() {
         const isTvShow = Boolean(item.name);
 
         return (
-          <MovieCard
+          <MediaCard
             key={item.id}
             id={item.id}
             title={item.title || item.name}

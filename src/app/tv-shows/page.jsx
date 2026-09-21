@@ -1,4 +1,4 @@
-import MovieCard from "../../components/MovieCard";
+import MediaCard from "@/components/MediaCard";
 import { getPopularTvShows } from "@/lib/tmdb";
 
 export default async function TvShowsPage() {
@@ -11,7 +11,7 @@ export default async function TvShowsPage() {
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {data.results.map((show) => (
-            <MovieCard
+            <MediaCard
               key={show.id}
               id={show.id}
               type="tv"

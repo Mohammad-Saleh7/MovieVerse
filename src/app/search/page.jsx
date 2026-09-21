@@ -1,4 +1,4 @@
-import MovieCard from "@/components/MovieCard";
+import MediaCard from "@/components/MediaCard";
 import { searchMovies } from "@/lib/tmdb";
 import Pagination from "./components/Pagination";
 
@@ -33,7 +33,7 @@ export default async function SearchPage({ searchParams }) {
           <>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
               {data.results.map((movie) => (
-                <MovieCard
+                <MediaCard
                   key={movie.id}
                   id={movie.id}
                   title={movie.title}

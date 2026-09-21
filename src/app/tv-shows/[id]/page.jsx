@@ -5,13 +5,13 @@ import {
   getTvShowVideos,
   getTvShowCredits,
 } from "@/lib/tmdb";
-import MovieCard from "@/components/MovieCard";
+import MediaCard from "@/components/MediaCard";
 import TrailerModal from "@/components/TrailerModal";
 import CastList from "@/components/CastList";
 import TvShowMetadata from "../components/TvShowMetadata";
 import FavoriteButton from "@/components/FavoriteButton";
 import WatchlistButton from "@/components/WatchlistButton";
-import HistoryTracker from "@/app/movies/components/HistoryTracker";
+import HistoryTracker from "@/components/HistoryTracker";
 
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 const FALLBACK_POSTER = "/images/poster-placeholder.png";
@@ -152,7 +152,7 @@ export default async function TvShowDetailsPage({ params }) {
 
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {recommendedShows.map((show) => (
-              <MovieCard
+              <MediaCard
                 key={show.id}
                 id={show.id}
                 title={show.name}
