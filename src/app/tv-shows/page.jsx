@@ -1,28 +1,45 @@
-import MediaCard from "@/components/MediaCard";
-import { getPopularTvShows } from "@/lib/tmdb";
+import TvShowGrid from "./components/TvShowGrid";
+import TvShowFilters from "./components/TvShowFilters";
 
-export default async function TvShowsPage() {
-  const data = await getPopularTvShows();
+import { getPopularTvShows, getTopRatedTvShows } from "@/lib/tmdb";
+import Pagination from "@/components/Pagination";
+
+export default async function TvShowsPage({ searchParams }) {
+  const params = await searchParams;
+  const category = params?.category || "popular";
+  const page = Number(params?.page) || 1;
+
+  let data;
+
+  switch (category) {
+    case "top-rated":
+      data = await getTopRatedTvShows(page);
+      break;
+
+    default:
+      data = await getPopularTvShows(page);
+  }
+
+  const shows = data.results || [];
 
   return (
     <main className="py-10">
       <section>
         <h1 className="mb-6 text-3xl font-bold">TV Shows</h1>
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {data.results.map((show) => (
-            <MediaCard
-              key={show.id}
-              id={show.id}
-              type="tv"
-              title={show.name}
-              year={show.first_air_date?.slice(0, 4)}
-              rating={show.vote_average.toFixed(1)}
-              overview={show.overview}
-              poster={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
-            />
-          ))}
-        </div>
+        <TvShowFilters />
+
+        {shows.length === 0 ? (
+          <p className="text-muted-foreground">No TV shows found.</p>
+        ) : (
+          <TvShowGrid shows={shows} />
+        )}
+        <Pagination
+          currentPage={page}
+          totalPages={data.total_pages}
+          category={category}
+          basePath="/tv-shows"
+        />
       </section>
     </main>
   );

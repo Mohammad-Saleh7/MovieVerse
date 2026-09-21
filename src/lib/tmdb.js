@@ -1,15 +1,31 @@
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 
 //Movies//
-export async function getPopularMovies() {
+export async function getPopularMovies(page = 1) {
   const response = await fetch(
-    `${TMDB_BASE_URL}/movie/popular?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+    `${TMDB_BASE_URL}/movie/popular?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=${page}`,
   );
 
   if (!response.ok) {
     throw new Error("Failed to fetch popular movies");
   }
 
+  return response.json();
+}
+
+export async function getNowPlayingMovies(page = 1) {
+  const response = await fetch(
+    `${TMDB_BASE_URL}/movie/now_playing?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+  );
+  if (!response.ok) throw new Error("Failed to fetch now playing movies");
+  return response.json();
+}
+
+export async function getUpcomingMovies(page = 1) {
+  const response = await fetch(
+    `${TMDB_BASE_URL}/movie/upcoming?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=${page}`,
+  );
+  if (!response.ok) throw new Error("Failed to fetch upcoming movies");
   return response.json();
 }
 
@@ -63,9 +79,9 @@ export async function getMovieCredits(id) {
 }
 //////////////////////////////////////////////////////////////
 //TvShows
-export async function getPopularTvShows() {
+export async function getPopularTvShows(page = 1) {
   const response = await fetch(
-    `${TMDB_BASE_URL}/tv/popular?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+    `${TMDB_BASE_URL}/tv/popular?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=${page}`,
   );
 
   if (!response.ok) {
@@ -123,6 +139,18 @@ export async function getTvShowCredits(id) {
   return response.json();
 }
 
+export async function getTopRatedTvShows(page = 1) {
+  const response = await fetch(
+    `${TMDB_BASE_URL}/tv/top_rated?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=${page}`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch top rated TV shows");
+  }
+
+  return response.json();
+}
+
 ///////////////////////////////////////////////////
 //Trending
 export async function getTrendingMovies() {
@@ -138,9 +166,9 @@ export async function getTrendingMovies() {
 }
 /////////////////////////////////////////////////////////
 //TopRated
-export async function getTopRatedMovies() {
+export async function getTopRatedMovies(page = 1) {
   const response = await fetch(
-    `${TMDB_BASE_URL}/movie/top_rated?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+    `${TMDB_BASE_URL}/movie/top_rated?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=${page}`,
   );
 
   if (!response.ok) {
