@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 export default function FavoriteButton({ movie }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
+  const itemTitle = movie.title || movie.name;
+
   useEffect(() => {
     const favorites = JSON.parse(
       localStorage.getItem("movieverse-favorites") || "[]",
@@ -48,7 +50,9 @@ export default function FavoriteButton({ movie }) {
       onClick={handleFavorite}
       className="mt-6"
     >
-      {isFavorite ? "♥ Added to Favorites" : "♡ Add to Favorites"}
+      {isFavorite
+        ? `♥ ${itemTitle} Added to Favorites`
+        : `♡ Add ${itemTitle} to Favorites`}
     </Button>
   );
 }

@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 export default function WatchlistButton({ movie }) {
   const [isInWatchlist, setIsInWatchlist] = useState(false);
 
+  const itemTitle = movie.title || movie.name;
+
   useEffect(() => {
     const watchlist = JSON.parse(
       localStorage.getItem("movieverse-watchlist") || "[]",
@@ -48,7 +50,9 @@ export default function WatchlistButton({ movie }) {
       onClick={handleWatchlist}
       className="mt-6"
     >
-      {isInWatchlist ? "✓ Added to Watchlist" : "+ Add to Watchlist"}
+      {isInWatchlist
+        ? `✓ ${itemTitle} Added to Watchlist`
+        : `+ Add ${itemTitle} to Watchlist`}
     </Button>
   );
 }

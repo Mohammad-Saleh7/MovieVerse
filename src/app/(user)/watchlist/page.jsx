@@ -21,21 +21,34 @@ export default function WatchListPage() {
 
         {watchlist.length === 0 ? (
           <p className="text-muted-foreground">
-            You haven't added any movies to your watchlist yet.
+            You haven't added any movies or TV shows to your watchlist yet.
           </p>
         ) : (
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {watchlist.map((movie) => (
-              <MovieCard
-                key={movie.id}
-                id={movie.id}
-                title={movie.title}
-                year={movie.release_date?.slice(0, 4)}
-                rating={movie.vote_average?.toFixed(1)}
-                overview={movie.overview}
-                poster={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              />
-            ))}
+            {watchlist.map((item) => {
+              const isTvShow = Boolean(item.name);
+
+              return (
+                <MovieCard
+                  key={item.id}
+                  id={item.id}
+                  title={item.title || item.name}
+                  year={
+                    isTvShow
+                      ? item.first_air_date?.slice(0, 4)
+                      : item.release_date?.slice(0, 4)
+                  }
+                  rating={item.vote_average?.toFixed(1)}
+                  overview={item.overview}
+                  poster={
+                    item.poster_path
+                      ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                      : undefined
+                  }
+                  type={isTvShow ? "tv" : "movie"}
+                />
+              );
+            })}
           </div>
         )}
       </section>

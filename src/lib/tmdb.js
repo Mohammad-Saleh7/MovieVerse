@@ -23,6 +23,44 @@ export async function getMovieDetails(id) {
   }
   return response.json();
 }
+
+export async function getMovieRecommendations(id) {
+  const response = await fetch(
+    `${TMDB_BASE_URL}/movie/${id}/recommendations?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch movie recommendations");
+  }
+
+  return response.json();
+}
+
+//Watch Trailer//
+export async function getMovieVideos(id) {
+  const response = await fetch(
+    `${TMDB_BASE_URL}/movie/${id}/videos?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch movie videos");
+  }
+
+  return response.json();
+}
+
+//Cast//
+export async function getMovieCredits(id) {
+  const response = await fetch(
+    `${TMDB_BASE_URL}/movie/${id}/credits?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch movie credits");
+  }
+
+  return response.json();
+}
 //////////////////////////////////////////////////////////////
 //TvShows
 export async function getPopularTvShows() {
@@ -48,6 +86,43 @@ export async function getTvShowDetails(id) {
 
   return response.json();
 }
+
+export async function getTvShowRecommendations(id) {
+  const response = await fetch(
+    `${TMDB_BASE_URL}/tv/${id}/recommendations?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch TV show recommendations");
+  }
+
+  return response.json();
+}
+
+export async function getTvShowVideos(id) {
+  const response = await fetch(
+    `${TMDB_BASE_URL}/tv/${id}/videos?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch TV show videos");
+  }
+
+  return response.json();
+}
+
+export async function getTvShowCredits(id) {
+  const response = await fetch(
+    `${TMDB_BASE_URL}/tv/${id}/credits?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch TV show credits");
+  }
+
+  return response.json();
+}
+
 ///////////////////////////////////////////////////
 //Trending
 export async function getTrendingMovies() {
@@ -76,9 +151,11 @@ export async function getTopRatedMovies() {
 }
 //////////////////////////////////////////////////////////////
 //Search
-export async function searchMovies(query) {
+export async function searchMovies(query, page = 1) {
   const response = await fetch(
-    `${TMDB_BASE_URL}/search/movie?api_key=${process.env.TMDB_API_KEY}&query=${encodeURIComponent(query)}&language=en-US`,
+    `${TMDB_BASE_URL}/search/movie?api_key=${process.env.TMDB_API_KEY}&query=${encodeURIComponent(
+      query,
+    )}&language=en-US&page=${page}`,
   );
 
   if (!response.ok) {
