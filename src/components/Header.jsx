@@ -24,16 +24,6 @@ export default function Header() {
           onClick={closeMenu}
           className="flex shrink-0 items-center gap-3"
         >
-          <Image
-            src="/header-logo.jpg"
-            width={52}
-            height={52}
-            alt="MovieVerse"
-            className="rounded-full object-cover"
-          />
-
-          <div className="h-10 w-px bg-border" />
-
           <span className="text-xl font-bold tracking-tight">MovieVerse</span>
         </Link>
 
