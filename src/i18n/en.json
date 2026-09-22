@@ -1,0 +1,193 @@
+{
+  "nav": {
+    "home": "Home",
+    "movies": "Movies",
+    "tvShows": "TV Shows",
+    "trending": "Trending",
+    "topRated": "Top Rated",
+    "favorites": "Favorites",
+    "watchlist": "Watchlist",
+    "history": "History"
+  },
+  "header": {
+    "profile": "Profile",
+    "login": "Login",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "theme": "Theme"
+  },
+  "home": {
+    "trendingMovies": "Trending Movies",
+    "popularMovies": "Popular Movies",
+    "popularTvShows": "Popular TV Shows",
+    "viewAll": "View All"
+  },
+  "search": {
+    "placeholder": "Search movies...",
+    "clear": "Clear search",
+    "resultsTitle": "Search Results",
+    "enterMovie": "Enter a movie name to search.",
+    "noMoviesFound": "No movies found",
+    "noMoviesMatching": "We couldn't find any movies matching \"{query}\". Try searching with a different title."
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {currentPage} of {totalPages}"
+  },
+  "movies": {
+    "title": "Movies",
+    "noMovies": "No movies found.",
+    "filters": {
+      "popular": "Popular",
+      "topRated": "Top Rated",
+      "nowPlaying": "Now Playing",
+      "upcoming": "Upcoming"
+    }
+  },
+  "movieDetails": {
+    "posterAlt": "Poster of {title}",
+    "minutes": "min",
+    "runtimeNA": "Runtime N/A",
+    "overview": "Overview",
+    "noOverview": "No overview available.",
+    "moreLikeThis": "More Like This",
+    "watchTrailer": "Watch Trailer",
+    "closeTrailer": "Close trailer",
+
+    "metadata": {
+      "title": "Movie Info",
+      "locale": "en",
+      "releaseDate": "Release Date",
+      "runtime": "Runtime",
+      "minutes": "min",
+      "status": "Status",
+      "originalLanguage": "Original Language",
+      "budget": "Budget",
+      "revenue": "Revenue"
+    },
+
+    "cast": {
+      "title": "Cast",
+      "unknownRole": "Unknown role"
+    }
+  },
+  "tvShows": {
+    "title": "TV Shows",
+    "noShows": "No TV shows found.",
+    "filters": {
+      "popular": "Popular",
+      "topRated": "Top Rated"
+    }
+  },
+  "tvShowDetails": {
+    "posterAlt": "Poster of {title}",
+    "seasons": "Seasons",
+    "seasonsNA": "Seasons N/A",
+    "episodes": "Episodes",
+    "episodesNA": "Episodes N/A",
+    "overview": "Overview",
+    "noOverview": "No overview available.",
+    "moreLikeThis": "More Like This"
+  },
+  "tvShowMetadata": {
+    "title": "TV Show Info",
+    "firstAirDate": "First Air Date",
+    "lastAirDate": "Last Air Date",
+    "seasons": "Seasons",
+    "episodes": "Episodes",
+    "status": "Status",
+    "originalLanguage": "Original Language",
+    "episodeRuntime": "Episode Runtime",
+    "minutes": "min",
+    "type": "Type",
+    "networks": "Networks",
+    "productionCompanies": "Production Companies",
+    "na": "N/A"
+  },
+  "favorite": {
+    "add": "Add to Favorites",
+    "added": "Added to Favorites"
+  },
+  "watchlist": {
+    "add": "Add to Watchlist",
+    "added": "Added to Watchlist"
+  },
+  "trailer": {
+    "watch": "Watch Trailer",
+    "close": "Close trailer",
+    "trailerLabel": "{title} trailer"
+  },
+  "favorites": {
+    "title": "My Favorites",
+    "empty": "You haven't added any favorites yet."
+  },
+  "watchlist": {
+    "title": "My Watchlist",
+    "empty": "You haven't added any movies or TV shows to your watchlist yet.",
+    "add": "Add to Watchlist",
+    "added": "Added to Watchlist"
+  },
+  "history": {
+    "title": "Watch History",
+    "empty": "You haven't watched any movies or TV shows yet."
+  },
+  "profile": {
+    "title": "Profile",
+    "userProfile": "User Profile",
+    "description": "Manage your MovieVerse account.",
+    "name": "Name",
+    "email": "Email"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "description": "Login to your MovieVerse account",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "••••••••",
+      "submit": "Login",
+      "noAccount": "Don't have an account?",
+      "register": "Register"
+    },
+    "register": {
+      "title": "Create Account",
+      "description": "Create your MovieVerse account",
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "••••••••",
+      "submit": "Register",
+      "hasAccount": "Already have an account?",
+      "login": "Login"
+    }
+  },
+  "mediaCard": {
+    "posterAlt": "Poster of {title}",
+    "noOverview": "No overview available.",
+    "ratingNA": "N/A"
+  },
+  "trending": {
+    "title": "Trending Movies"
+  },
+  "topRated": {
+    "title": "Top Rated Movies"
+  },
+  "footer": {
+    "description": "Discover movies and TV shows you love.",
+    "movies": "Movies",
+    "tvShows": "TV Shows",
+    "trending": "Trending",
+    "topRated": "Top Rated",
+    "copyright": "© {year} MovieVerse. All rights reserved."
+  },
+  "hero": {
+    "featured": "Featured Movie",
+    "posterAlt": "Movie poster",
+    "noOverview": "No overview available.",
+    "watchNow": "Watch Now"
+  }
+}

@@ -2,17 +2,19 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const filters = [
-  { value: "popular", label: "Popular" },
-  { value: "top-rated", label: "Top Rated" },
-  { value: "now-playing", label: "Now Playing" },
-  { value: "upcoming", label: "Upcoming" },
+  { value: "popular", key: "popular" },
+  { value: "top-rated", key: "topRated" },
+  { value: "now-playing", key: "nowPlaying" },
+  { value: "upcoming", key: "upcoming" },
 ];
 
 export default function MovieFilters() {
   const searchParams = useSearchParams();
   const currentCategory = searchParams.get("category") || "popular";
+  const t = useTranslations("movies.filters");
 
   return (
     <div className="mb-8 flex flex-wrap gap-2">
@@ -29,7 +31,7 @@ export default function MovieFilters() {
                 : "hover:bg-accent"
             }`}
           >
-            {filter.label}
+            {t(filter.key)}
           </Link>
         );
       })}

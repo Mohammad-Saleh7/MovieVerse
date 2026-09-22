@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function FavoriteButton({ movie }) {
   const [isFavorite, setIsFavorite] = useState(false);
-
-  const itemTitle = movie.title || movie.name;
+  const t = useTranslations("favorite");
 
   useEffect(() => {
     const favorites = JSON.parse(
@@ -50,7 +50,7 @@ export default function FavoriteButton({ movie }) {
       onClick={handleFavorite}
       className="mt-6"
     >
-      {isFavorite ? `♥  Added to Favorites` : `♡ Add  to Favorites`}
+      {isFavorite ? `♥ ${t("added")}` : `♡ ${t("add")}`}
     </Button>
   );
 }

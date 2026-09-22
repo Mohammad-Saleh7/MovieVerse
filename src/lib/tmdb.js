@@ -1,9 +1,13 @@
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 
-//Movies//
-export async function getPopularMovies(page = 1) {
+const getLanguage = (locale) => (locale === "fa" ? "fa-IR" : "en-US");
+
+// Movies
+export async function getPopularMovies(page = 1, locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/movie/popular?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=${page}`,
+    `${TMDB_BASE_URL}/movie/popular?api_key=${process.env.TMDB_API_KEY}&language=${language}&page=${page}`,
   );
 
   if (!response.ok) {
@@ -13,36 +17,53 @@ export async function getPopularMovies(page = 1) {
   return response.json();
 }
 
-export async function getNowPlayingMovies(page = 1) {
+export async function getNowPlayingMovies(page = 1, locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/movie/now_playing?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+    `${TMDB_BASE_URL}/movie/now_playing?api_key=${process.env.TMDB_API_KEY}&language=${language}&page=${page}`,
   );
-  if (!response.ok) throw new Error("Failed to fetch now playing movies");
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch now playing movies");
+  }
+
   return response.json();
 }
 
-export async function getUpcomingMovies(page = 1) {
+export async function getUpcomingMovies(page = 1, locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/movie/upcoming?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=${page}`,
+    `${TMDB_BASE_URL}/movie/upcoming?api_key=${process.env.TMDB_API_KEY}&language=${language}&page=${page}`,
   );
-  if (!response.ok) throw new Error("Failed to fetch upcoming movies");
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch upcoming movies");
+  }
+
   return response.json();
 }
 
-export async function getMovieDetails(id) {
+export async function getMovieDetails(id, locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/movie/${id}?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+    `${TMDB_BASE_URL}/movie/${id}?api_key=${process.env.TMDB_API_KEY}&language=${language}`,
   );
 
   if (!response.ok) {
     throw new Error("Failed to fetch movie details");
   }
+
   return response.json();
 }
 
-export async function getMovieRecommendations(id) {
+export async function getMovieRecommendations(id, locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/movie/${id}/recommendations?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+    `${TMDB_BASE_URL}/movie/${id}/recommendations?api_key=${process.env.TMDB_API_KEY}&language=${language}`,
   );
 
   if (!response.ok) {
@@ -52,23 +73,40 @@ export async function getMovieRecommendations(id) {
   return response.json();
 }
 
-//Watch Trailer//
-export async function getMovieVideos(id) {
+// Trailer
+export async function getMovieVideos(id, locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/movie/${id}/videos?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+    `${TMDB_BASE_URL}/movie/${id}/videos?api_key=${process.env.TMDB_API_KEY}&language=${language}`,
   );
 
   if (!response.ok) {
     throw new Error("Failed to fetch movie videos");
   }
 
-  return response.json();
+  const data = await response.json();
+
+  // اگر فارسی بود ولی ویدئو نداشت، انگلیسی را امتحان کن
+  if (locale === "fa" && (!data.results || data.results.length === 0)) {
+    const fallbackResponse = await fetch(
+      `${TMDB_BASE_URL}/movie/${id}/videos?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+    );
+
+    if (fallbackResponse.ok) {
+      return fallbackResponse.json();
+    }
+  }
+
+  return data;
 }
 
-//Cast//
-export async function getMovieCredits(id) {
+// Cast
+export async function getMovieCredits(id, locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/movie/${id}/credits?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+    `${TMDB_BASE_URL}/movie/${id}/credits?api_key=${process.env.TMDB_API_KEY}&language=${language}`,
   );
 
   if (!response.ok) {
@@ -77,11 +115,13 @@ export async function getMovieCredits(id) {
 
   return response.json();
 }
-//////////////////////////////////////////////////////////////
-//TvShows
-export async function getPopularTvShows(page = 1) {
+
+// TV Shows
+export async function getPopularTvShows(page = 1, locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/tv/popular?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=${page}`,
+    `${TMDB_BASE_URL}/tv/popular?api_key=${process.env.TMDB_API_KEY}&language=${language}&page=${page}`,
   );
 
   if (!response.ok) {
@@ -91,9 +131,11 @@ export async function getPopularTvShows(page = 1) {
   return response.json();
 }
 
-export async function getTvShowDetails(id) {
+export async function getTvShowDetails(id, locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/tv/${id}?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+    `${TMDB_BASE_URL}/tv/${id}?api_key=${process.env.TMDB_API_KEY}&language=${language}`,
   );
 
   if (!response.ok) {
@@ -103,9 +145,11 @@ export async function getTvShowDetails(id) {
   return response.json();
 }
 
-export async function getTvShowRecommendations(id) {
+export async function getTvShowRecommendations(id, locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/tv/${id}/recommendations?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+    `${TMDB_BASE_URL}/tv/${id}/recommendations?api_key=${process.env.TMDB_API_KEY}&language=${language}`,
   );
 
   if (!response.ok) {
@@ -115,21 +159,37 @@ export async function getTvShowRecommendations(id) {
   return response.json();
 }
 
-export async function getTvShowVideos(id) {
+export async function getTvShowVideos(id, locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/tv/${id}/videos?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+    `${TMDB_BASE_URL}/tv/${id}/videos?api_key=${process.env.TMDB_API_KEY}&language=${language}`,
   );
 
   if (!response.ok) {
     throw new Error("Failed to fetch TV show videos");
   }
 
-  return response.json();
+  const data = await response.json();
+
+  if (locale === "fa" && (!data.results || data.results.length === 0)) {
+    const fallbackResponse = await fetch(
+      `${TMDB_BASE_URL}/tv/${id}/videos?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+    );
+
+    if (fallbackResponse.ok) {
+      return fallbackResponse.json();
+    }
+  }
+
+  return data;
 }
 
-export async function getTvShowCredits(id) {
+export async function getTvShowCredits(id, locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/tv/${id}/credits?api_key=${process.env.TMDB_API_KEY}&language=en-US`,
+    `${TMDB_BASE_URL}/tv/${id}/credits?api_key=${process.env.TMDB_API_KEY}&language=${language}`,
   );
 
   if (!response.ok) {
@@ -139,9 +199,11 @@ export async function getTvShowCredits(id) {
   return response.json();
 }
 
-export async function getTopRatedTvShows(page = 1) {
+export async function getTopRatedTvShows(page = 1, locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/tv/top_rated?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=${page}`,
+    `${TMDB_BASE_URL}/tv/top_rated?api_key=${process.env.TMDB_API_KEY}&language=${language}&page=${page}`,
   );
 
   if (!response.ok) {
@@ -151,11 +213,12 @@ export async function getTopRatedTvShows(page = 1) {
   return response.json();
 }
 
-///////////////////////////////////////////////////
-//Trending
-export async function getTrendingMovies() {
+// Trending
+export async function getTrendingMovies(locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/trending/movie/week?api_key=${process.env.TMDB_API_KEY}`,
+    `${TMDB_BASE_URL}/trending/movie/week?api_key=${process.env.TMDB_API_KEY}&language=${language}`,
   );
 
   if (!response.ok) {
@@ -164,11 +227,13 @@ export async function getTrendingMovies() {
 
   return response.json();
 }
-/////////////////////////////////////////////////////////
-//TopRated
-export async function getTopRatedMovies(page = 1) {
+
+// Top Rated
+export async function getTopRatedMovies(page = 1, locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/movie/top_rated?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=${page}`,
+    `${TMDB_BASE_URL}/movie/top_rated?api_key=${process.env.TMDB_API_KEY}&language=${language}&page=${page}`,
   );
 
   if (!response.ok) {
@@ -177,13 +242,15 @@ export async function getTopRatedMovies(page = 1) {
 
   return response.json();
 }
-//////////////////////////////////////////////////////////////
-//Search
-export async function searchMovies(query, page = 1) {
+
+// Search
+export async function searchMovies(query, page = 1, locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
     `${TMDB_BASE_URL}/search/movie?api_key=${process.env.TMDB_API_KEY}&query=${encodeURIComponent(
       query,
-    )}&language=en-US&page=${page}`,
+    )}&language=${language}&page=${page}`,
   );
 
   if (!response.ok) {
@@ -192,10 +259,13 @@ export async function searchMovies(query, page = 1) {
 
   return response.json();
 }
-//////////////////////////////////////////////////
-export async function getFeaturedMovie() {
+
+// Featured
+export async function getFeaturedMovie(locale = "en") {
+  const language = getLanguage(locale);
+
   const response = await fetch(
-    `${TMDB_BASE_URL}/movie/popular?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`,
+    `${TMDB_BASE_URL}/movie/popular?api_key=${process.env.TMDB_API_KEY}&language=${language}&page=1`,
   );
 
   if (!response.ok) {
@@ -205,4 +275,20 @@ export async function getFeaturedMovie() {
   const data = await response.json();
 
   return data.results?.[0] || null;
+}
+
+export async function searchTvShows(query, page = 1, locale = "en") {
+  const language = getLanguage(locale);
+
+  const response = await fetch(
+    `${TMDB_BASE_URL}/search/tv?api_key=${process.env.TMDB_API_KEY}&query=${encodeURIComponent(
+      query,
+    )}&language=${language}&page=${page}`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to search TV shows");
+  }
+
+  return response.json();
 }

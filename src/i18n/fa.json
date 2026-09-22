@@ -1,0 +1,200 @@
+{
+  "nav": {
+    "home": "خانه",
+    "movies": "فیلم‌ها",
+    "tvShows": "سریال‌ها",
+    "trending": "ترندها",
+    "topRated": "برترین‌ها",
+    "favorites": "علاقه‌مندی‌ها",
+    "watchlist": "لیست تماشا",
+    "history": "تاریخچه",
+    "profile": "پروفایل",
+    "login": "ورود"
+  },
+
+  "header": {
+    "profile": "پروفایل",
+    "login": "ورود",
+    "openMenu": "باز کردن منو",
+    "closeMenu": "بستن منو",
+    "theme": "ظاهر"
+  },
+  "home": {
+    "trendingMovies": "فیلم‌های ترند",
+    "popularMovies": "فیلم‌های محبوب",
+    "popularTvShows": "سریال‌های محبوب",
+    "viewAll": "مشاهده همه"
+  },
+  "search": {
+    "placeholder": "جستجوی فیلم‌ها...",
+    "clear": "پاک کردن جستجو",
+    "resultsTitle": "نتایج جستجو",
+    "enterMovie": "نام یک فیلم را برای جستجو وارد کنید.",
+    "noMoviesFound": "فیلمی پیدا نشد",
+    "noMoviesMatching": "فیلمی مطابق با «{query}» پیدا نکردیم. عنوان دیگری را جستجو کنید."
+  },
+
+  "pagination": {
+    "previous": "قبلی",
+    "next": "بعدی",
+    "pageOf": "صفحه {currentPage} از {totalPages}"
+  },
+
+  "movies": {
+    "title": "فیلم‌ها",
+    "noMovies": "فیلمی پیدا نشد.",
+    "filters": {
+      "popular": "محبوب",
+      "topRated": "برترین‌ها",
+      "nowPlaying": "در حال اکران",
+      "upcoming": "به‌زودی"
+    }
+  },
+
+  "movieDetails": {
+    "posterAlt": "پوستر {title}",
+    "minutes": "دقیقه",
+    "runtimeNA": "مدت زمان نامشخص",
+    "overview": "خلاصه داستان",
+    "noOverview": "خلاصه‌ای برای این فیلم موجود نیست.",
+    "moreLikeThis": "فیلم‌های مشابه",
+    "watchTrailer": "تماشای تریلر",
+    "closeTrailer": "بستن تریلر",
+
+    "metadata": {
+      "title": "اطلاعات فیلم",
+      "locale": "fa",
+      "releaseDate": "تاریخ انتشار",
+      "runtime": "مدت زمان",
+      "minutes": "دقیقه",
+      "status": "وضعیت",
+      "originalLanguage": "زبان اصلی",
+      "budget": "بودجه",
+      "revenue": "درآمد"
+    },
+
+    "cast": {
+      "title": "بازیگران",
+      "unknownRole": "نقش نامشخص"
+    }
+  },
+
+  "tvShows": {
+    "title": "سریال‌ها",
+    "noShows": "سریالی پیدا نشد.",
+    "filters": {
+      "popular": "محبوب",
+      "topRated": "برترین‌ها"
+    }
+  },
+  "tvShowDetails": {
+    "posterAlt": "پوستر {title}",
+    "seasons": "فصل",
+    "seasonsNA": "تعداد فصل نامشخص",
+    "episodes": "قسمت",
+    "episodesNA": "تعداد قسمت نامشخص",
+    "overview": "خلاصه داستان",
+    "noOverview": "خلاصه‌ای برای این سریال موجود نیست.",
+    "moreLikeThis": "سریال‌های مشابه"
+  },
+  "tvShowMetadata": {
+    "title": "اطلاعات سریال",
+    "firstAirDate": "تاریخ اولین پخش",
+    "lastAirDate": "تاریخ آخرین پخش",
+    "seasons": "فصل‌ها",
+    "episodes": "قسمت‌ها",
+    "status": "وضعیت",
+    "originalLanguage": "زبان اصلی",
+    "episodeRuntime": "مدت زمان قسمت",
+    "minutes": "دقیقه",
+    "type": "نوع",
+    "networks": "شبکه‌ها",
+    "productionCompanies": "شرکت‌های تولیدکننده",
+    "na": "نامشخص"
+  },
+  "favorite": {
+    "add": "افزودن به علاقه‌مندی‌ها",
+    "added": "به علاقه‌مندی‌ها اضافه شد"
+  },
+  "watchlist": {
+    "add": "افزودن به لیست تماشا",
+    "added": "به لیست تماشا اضافه شد"
+  },
+  "trailer": {
+    "watch": "مشاهده تریلر",
+    "close": "بستن تریلر",
+    "trailerLabel": "تریلر {title}"
+  },
+  "favorites": {
+    "title": "علاقه‌مندی‌های من",
+    "empty": "هنوز هیچ موردی به علاقه‌مندی‌ها اضافه نکرده‌اید."
+  },
+  "watchlist": {
+    "title": "لیست تماشای من",
+    "empty": "هنوز هیچ فیلم یا سریالی به لیست تماشای خود اضافه نکرده‌اید.",
+    "add": "افزودن به لیست تماشا",
+    "added": "به لیست تماشا اضافه شد"
+  },
+  "history": {
+    "title": "تاریخچه تماشا",
+    "empty": "هنوز هیچ فیلم یا سریالی تماشا نکرده‌اید."
+  },
+  "profile": {
+    "title": "پروفایل",
+    "userProfile": "پروفایل کاربر",
+    "description": "حساب مووی ورس خود را مدیریت کنید",
+    "name": "نام",
+    "email": "ایمیل"
+  },
+  "auth": {
+    "login": {
+      "title": "خوش آمدید",
+      "description": "وارد حساب مووی ورس خود شوید",
+      "email": "ایمیل",
+      "emailPlaceholder": "you@example.com",
+      "password": "رمز عبور",
+      "passwordPlaceholder": "••••••••",
+      "submit": "ورود",
+      "noAccount": "حساب کاربری ندارید؟",
+      "register": "ثبت‌نام"
+    },
+    "register": {
+      "title": "ایجاد حساب کاربری",
+      "description": "حساب مووی ورس خود را ایجاد کنید",
+      "name": "نام",
+      "namePlaceholder": "نام شما",
+      "email": "ایمیل",
+      "emailPlaceholder": "you@example.com",
+      "password": "رمز عبور",
+      "passwordPlaceholder": "••••••••",
+      "submit": "ثبت‌نام",
+      "hasAccount": "قبلاً حساب کاربری دارید؟",
+      "login": "ورود"
+    }
+  },
+  "mediaCard": {
+    "posterAlt": "پوستر {title}",
+    "noOverview": "خلاصه‌ای برای این مورد موجود نیست.",
+    "ratingNA": "نامشخص"
+  },
+  "trending": {
+    "title": "فیلم‌های ترند"
+  },
+  "topRated": {
+    "title": "فیلم‌های برتر"
+  },
+  "footer": {
+    "description": "فیلم‌ها و سریال‌هایی را که دوست دارید کشف کنید.",
+    "movies": "فیلم‌ها",
+    "tvShows": "سریال‌ها",
+    "trending": "ترندها",
+    "topRated": "برترین‌ها",
+    "copyright": "© {year} MovieVerse. تمامی حقوق محفوظ است."
+  },
+  "hero": {
+    "featured": "فیلم منتخب",
+    "posterAlt": "پوستر فیلم",
+    "noOverview": "خلاصه‌ای برای این فیلم موجود نیست.",
+    "watchNow": "تماشای فیلم"
+  }
+}

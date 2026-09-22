@@ -1,8 +1,11 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w185";
 
-export default function CastList({ cast = [] }) {
+export default async function CastList({ cast = [] }) {
+  const t = await getTranslations("movieDetails.cast");
+
   const visibleCast = cast.filter((person) => person.profile_path).slice(0, 8);
 
   if (visibleCast.length === 0) {
@@ -12,7 +15,7 @@ export default function CastList({ cast = [] }) {
   return (
     <section className="mt-12">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold">Cast</h2>
+        <h2 className="text-2xl font-bold">{t("title")}</h2>
       </div>
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-8">
@@ -35,7 +38,7 @@ export default function CastList({ cast = [] }) {
               <h3 className="truncate text-sm font-semibold">{person.name}</h3>
 
               <p className="mt-1 truncate text-xs text-muted-foreground">
-                {person.character || "Unknown role"}
+                {person.character || t("unknownRole")}
               </p>
             </div>
           </div>

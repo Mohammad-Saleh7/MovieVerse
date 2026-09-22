@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 
 const FALLBACK_POSTER = "/images/poster-placeholder.png";
 
@@ -17,6 +18,8 @@ export default function MediaCard({
   type = "movie",
   priority = false,
 }) {
+  const t = useTranslations("mediaCard");
+
   const href = `/${type === "tv" ? "tv-shows" : "movies"}/${id}`;
 
   return (
@@ -38,14 +41,14 @@ export default function MediaCard({
 
           <div
             className="
-      pointer-events-none
-      absolute inset-0
-      opacity-0
-      transition-opacity duration-500
-      group-hover/poster:opacity-100
-      dark:bg-[radial-gradient(circle_at_center,rgba(17,47,137,0.22),transparent_65%)]
-      bg-[radial-gradient(circle_at_center,rgba(49,92,255,0.12),transparent_65%)]
-    "
+              pointer-events-none
+              absolute inset-0
+              opacity-0
+              transition-opacity duration-500
+              group-hover/poster:opacity-100
+              dark:bg-[radial-gradient(circle_at_center,rgba(17,47,137,0.22),transparent_65%)]
+              bg-[radial-gradient(circle_at_center,rgba(49,92,255,0.12),transparent_65%)]
+            "
           />
         </div>
 
@@ -63,8 +66,8 @@ export default function MediaCard({
             </span>
           </div>
 
-          <p className="line-clamp-2 text-sm leading-6 text-muted-foreground">
-            {overview || "No overview available."}
+          <p className="line-clamp-2 min-h-[48px] text-sm leading-6 text-muted-foreground">
+            {overview || t("noOverview")}
           </p>
         </CardContent>
       </Card>

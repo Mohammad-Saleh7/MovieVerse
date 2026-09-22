@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function WatchlistButton({ movie }) {
   const [isInWatchlist, setIsInWatchlist] = useState(false);
-
-  const itemTitle = movie.title || movie.name;
+  const t = useTranslations("watchlist");
 
   useEffect(() => {
     const watchlist = JSON.parse(
@@ -50,7 +50,7 @@ export default function WatchlistButton({ movie }) {
       onClick={handleWatchlist}
       className="mt-6"
     >
-      {isInWatchlist ? `✓  Added to Watchlist` : `+ Add  to Watchlist`}
+      {isInWatchlist ? `✓ ${t("added")}` : `+ ${t("add")}`}
     </Button>
   );
 }

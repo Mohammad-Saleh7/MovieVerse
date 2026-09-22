@@ -2,6 +2,8 @@ import "./globals.css";
 import SiteLayout from "@/components/SiteLayout";
 import ThemeProvider from "@/components/ThemeProvider";
 import { Caveat } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 
 const caveat = Caveat({
   subsets: ["latin"],
@@ -13,13 +15,25 @@ export const metadata = {
   description: "MovieVerse - Movies and TV Shows",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
+  const isRTL = locale === "fa";
+
   return (
-    <html lang="en" suppressHydrationWarning className={caveat.variable}>
+    <html
+      lang={locale}
+      dir={isRTL ? "rtl" : "ltr"}
+      suppressHydrationWarning
+      className={caveat.variable}
+    >
       <body className="min-h-screen antialiased">
-        <ThemeProvider>
-          <SiteLayout>{children}</SiteLayout>
-        </ThemeProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <ThemeProvider>
+            <SiteLayout>{children}</SiteLayout>
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

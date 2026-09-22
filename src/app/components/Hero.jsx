@@ -4,10 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const FALLBACK_POSTER = "/images/poster-placeholder.png";
 
 export default function Hero({ movie }) {
+  const t = useTranslations("hero");
+
   if (!movie) {
     return null;
   }
@@ -31,10 +34,9 @@ export default function Hero({ movie }) {
           className="scale-110 object-cover object-center opacity-50 blur-2xl"
         />
 
-        {/* عکس اصلی - همیشه کامل و بدون برش نمایش داده می‌شود */}
         <Image
           src={poster}
-          alt={movie.title || "پوستر فیلم"}
+          alt={movie.title || t("posterAlt")}
           fill
           priority
           sizes="100vw"
@@ -47,7 +49,7 @@ export default function Hero({ movie }) {
         <div className="absolute inset-0 flex items-end">
           <div className="max-w-2xl p-6 sm:p-10 lg:p-12">
             <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
-              Featured Movie
+              {t("featured")}
             </span>
 
             <h1 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
@@ -64,13 +66,13 @@ export default function Hero({ movie }) {
             </div>
 
             <p className="mt-5 max-w-xl line-clamp-3 text-sm leading-7 text-white/75 sm:text-base">
-              {movie.overview || "No overview available."}
+              {movie.overview || t("noOverview")}
             </p>
 
             <div className="mt-7">
               <Link href={`/movies/${movie.id}`}>
                 <Button size="lg" className="cursor-pointer">
-                  Watch Now
+                  {t("watchNow")}
                 </Button>
               </Link>
             </div>

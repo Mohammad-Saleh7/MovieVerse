@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import MediaCard from "@/components/MediaCard";
 
 export default function HistoryPage() {
   const [history, setHistory] = useState([]);
+  const t = useTranslations("history");
 
   useEffect(() => {
     const storedHistory = JSON.parse(
@@ -17,12 +19,10 @@ export default function HistoryPage() {
   return (
     <main className="py-10">
       <section>
-        <h1 className="mb-6 text-3xl font-bold">Watch History</h1>
+        <h1 className="mb-6 text-3xl font-bold">{t("title")}</h1>
 
         {history.length === 0 ? (
-          <p className="text-muted-foreground">
-            You haven't watched any movies or TV shows yet.
-          </p>
+          <p className="text-muted-foreground">{t("empty")}</p>
         ) : (
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {history.map((item) => {

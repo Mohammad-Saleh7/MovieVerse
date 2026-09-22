@@ -1,11 +1,14 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
-export default function Pagination({
+export default async function Pagination({
   currentPage,
   totalPages,
   category,
   basePath,
 }) {
+  const t = await getTranslations("pagination");
+
   const previousPage = currentPage - 1;
   const nextPage = currentPage + 1;
 
@@ -16,12 +19,15 @@ export default function Pagination({
           href={`${basePath}?category=${category}&page=${previousPage}`}
           className="rounded-md border px-4 py-2 text-sm hover:bg-accent"
         >
-          Previous
+          {t("previous")}
         </Link>
       )}
 
       <span className="px-4 py-2 text-sm font-medium">
-        Page {currentPage} of {totalPages}
+        {t("pageOf", {
+          currentPage,
+          totalPages,
+        })}
       </span>
 
       {currentPage < totalPages && (
@@ -29,7 +35,7 @@ export default function Pagination({
           href={`${basePath}?category=${category}&page=${nextPage}`}
           className="rounded-md border px-4 py-2 text-sm hover:bg-accent"
         >
-          Next
+          {t("next")}
         </Link>
       )}
     </div>

@@ -1,10 +1,13 @@
 import Image from "next/image";
+import { getLocale, getTranslations } from "next-intl/server";
+
 import {
   getTvShowDetails,
   getTvShowRecommendations,
   getTvShowVideos,
   getTvShowCredits,
 } from "@/lib/tmdb";
+
 import MediaCard from "@/components/MediaCard";
 import TrailerModal from "@/components/TrailerModal";
 import CastList from "@/components/CastList";
@@ -17,13 +20,16 @@ const IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 const FALLBACK_POSTER = "/images/poster-placeholder.png";
 
 export default async function TvShowDetailsPage({ params }) {
+  const locale = await getLocale();
+  const t = await getTranslations("tvShowDetails");
+
   const { id } = await params;
 
   const [show, recommendations, videos, credits] = await Promise.all([
-    getTvShowDetails(id),
-    getTvShowRecommendations(id),
-    getTvShowVideos(id),
-    getTvShowCredits(id),
+    getTvShowDetails(id, locale),
+    getTvShowRecommendations(id, locale),
+    getTvShowVideos(id, locale),
+    getTvShowCredits(id, locale),
   ]);
 
   const poster = show.poster_path
@@ -48,7 +54,6 @@ export default async function TvShowDetailsPage({ params }) {
       {backdrop && (
         <section className="relative mb-6 overflow-hidden rounded-2xl bg-black sm:mb-8">
           <div className="relative min-h-[300px] w-full sm:min-h-[420px] lg:min-h-[500px]">
-            {/* Background */}
             <Image
               src={backdrop}
               alt=""
@@ -60,7 +65,6 @@ export default async function TvShowDetailsPage({ params }) {
               priority
             />
 
-            {/* Main backdrop */}
             <Image
               src={backdrop}
               alt={`${show.name} backdrop`}
@@ -71,13 +75,10 @@ export default async function TvShowDetailsPage({ params }) {
               priority
             />
 
-            {/* Bottom overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/10" />
 
-            {/* Top black shadow */}
             <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/70 via-black/30 to-transparent sm:h-28 sm:from-black/50" />
 
-            {/* Title */}
             <div className="absolute inset-0 flex items-end">
               <div className="w-full min-w-0 p-4 sm:p-8 lg:p-10">
                 <h1 className="max-w-full break-words text-2xl font-bold leading-tight tracking-tight text-white sm:max-w-4xl sm:text-4xl lg:text-5xl xl:text-6xl">
@@ -91,11 +92,10 @@ export default async function TvShowDetailsPage({ params }) {
 
       <section className="overflow-hidden rounded-2xl border bg-card">
         <div className="grid gap-6 p-4 sm:gap-8 sm:p-6 md:grid-cols-[280px_1fr] md:p-8">
-          {/* Poster */}
           <div className="relative mx-auto aspect-[2/3] w-full max-w-[220px] overflow-hidden rounded-xl bg-muted sm:max-w-[280px]">
             <Image
               src={poster}
-              alt={`پوستر ${show.name}`}
+              alt={t("posterAlt", { title: show.name })}
               fill
               sizes="(max-width: 768px) 220px, 280px"
               className="object-cover"
@@ -103,7 +103,6 @@ export default async function TvShowDetailsPage({ params }) {
             />
           </div>
 
-          {/* Content */}
           <div className="min-w-0 flex flex-col">
             <h1 className="break-words text-2xl font-bold leading-tight tracking-tight sm:text-4xl">
               {show.name}
@@ -115,7 +114,6 @@ export default async function TvShowDetailsPage({ params }) {
               </p>
             )}
 
-            {/* Info */}
             <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground sm:mt-5 sm:gap-x-5">
               <span>{show.first_air_date?.slice(0, 4) || "—"}</span>
 
@@ -123,18 +121,17 @@ export default async function TvShowDetailsPage({ params }) {
 
               <span>
                 {show.number_of_seasons
-                  ? `${show.number_of_seasons} Seasons`
-                  : "Seasons N/A"}
+                  ? `${show.number_of_seasons} ${t("seasons")}`
+                  : t("seasonsNA")}
               </span>
 
               <span>
                 {show.number_of_episodes
-                  ? `${show.number_of_episodes} Episodes`
-                  : "Episodes N/A"}
+                  ? `${show.number_of_episodes} ${t("episodes")}`
+                  : t("episodesNA")}
               </span>
             </div>
 
-            {/* Genres */}
             {show.genres?.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2 sm:mt-5">
                 {show.genres.map((genre) => (
@@ -148,24 +145,21 @@ export default async function TvShowDetailsPage({ params }) {
               </div>
             )}
 
-            {/* Overview */}
             <div className="mt-5 sm:mt-6">
               <h2 className="mb-2 text-lg font-semibold sm:text-xl">
-                Overview
+                {t("overview")}
               </h2>
 
               <p className="max-w-3xl break-words text-sm leading-7 text-muted-foreground sm:text-base">
-                {show.overview || "No overview available."}
+                {show.overview || t("noOverview")}
               </p>
             </div>
 
-            {/* Actions */}
             <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
               <FavoriteButton movie={show} />
               <WatchlistButton movie={show} />
             </div>
 
-            {/* Trailer */}
             {trailer && (
               <div className="mt-5 sm:mt-6">
                 <TrailerModal trailerKey={trailer.key} title={show.name} />
@@ -182,7 +176,7 @@ export default async function TvShowDetailsPage({ params }) {
       {recommendedShows.length > 0 && (
         <section className="mt-10 sm:mt-12">
           <h2 className="mb-5 text-xl font-bold sm:mb-6 sm:text-2xl">
-            More Like This
+            {t("moreLikeThis")}
           </h2>
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">

@@ -2,20 +2,22 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/movies", label: "Movies" },
-  { href: "/tv-shows", label: "TV Shows" },
-  { href: "/trending", label: "Trending" },
-  { href: "/top-rated", label: "Top Rated" },
-  { href: "/favorites", label: "Favorites" },
-  { href: "/watchlist", label: "Watchlist" },
-  { href: "/history", label: "History" },
+  { href: "/", key: "home" },
+  { href: "/movies", key: "movies" },
+  { href: "/tv-shows", key: "tvShows" },
+  { href: "/trending", key: "trending" },
+  { href: "/top-rated", key: "topRated" },
+  { href: "/favorites", key: "favorites" },
+  { href: "/watchlist", key: "watchlist" },
+  { href: "/history", key: "history" },
 ];
 
 export default function NavLinks({ mobile = false, onNavigate }) {
   const pathname = usePathname();
+  const t = useTranslations("nav");
 
   function isActive(href) {
     if (href === "/") {
@@ -39,7 +41,7 @@ export default function NavLinks({ mobile = false, onNavigate }) {
               mobile
                 ? `rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                     active
-                      ? "bg-black text-white dark:bg-accent dark:text-primary"
+                      ? "bg-black text-white dark:bg-white dark:text-black"
                       : "hover:bg-accent"
                   }`
                 : `transition-colors ${
@@ -47,7 +49,7 @@ export default function NavLinks({ mobile = false, onNavigate }) {
                   }`
             }
           >
-            {item.label}
+            {t(item.key)}
           </Link>
         );
       })}

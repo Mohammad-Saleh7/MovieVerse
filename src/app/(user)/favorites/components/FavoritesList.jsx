@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import MediaCard from "@/components/MediaCard";
 
 export default function FavoritesList() {
   const [favorites, setFavorites] = useState([]);
+  const t = useTranslations("favorites");
 
   useEffect(() => {
     const storedFavorites = JSON.parse(
@@ -15,11 +17,7 @@ export default function FavoritesList() {
   }, []);
 
   if (favorites.length === 0) {
-    return (
-      <p className="text-muted-foreground">
-        You haven't added any favorites yet.
-      </p>
-    );
+    return <p className="text-muted-foreground">{t("empty")}</p>;
   }
 
   return (

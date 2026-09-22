@@ -1,8 +1,13 @@
-export default function TvShowMetadata({ show }) {
-  const formatDate = (date) => {
-    if (!date) return "N/A";
+import { getLocale, getTranslations } from "next-intl/server";
 
-    return new Intl.DateTimeFormat("en-US", {
+export default async function TvShowMetadata({ show }) {
+  const locale = await getLocale();
+  const t = await getTranslations("tvShowMetadata");
+
+  const formatDate = (date) => {
+    if (!date) return t("na");
+
+    return new Intl.DateTimeFormat(locale === "fa" ? "fa-IR" : "en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -12,67 +17,68 @@ export default function TvShowMetadata({ show }) {
   return (
     <section className="mt-12">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold">TV Show Info</h2>
+        <h2 className="text-2xl font-bold">{t("title")}</h2>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="rounded-xl border bg-card p-5">
-          <p className="text-sm text-muted-foreground">First Air Date</p>
+          <p className="text-sm text-muted-foreground">{t("firstAirDate")}</p>
           <p className="mt-2 font-semibold">
             {formatDate(show.first_air_date)}
           </p>
         </div>
 
         <div className="rounded-xl border bg-card p-5">
-          <p className="text-sm text-muted-foreground">Last Air Date</p>
+          <p className="text-sm text-muted-foreground">{t("lastAirDate")}</p>
           <p className="mt-2 font-semibold">{formatDate(show.last_air_date)}</p>
         </div>
 
         <div className="rounded-xl border bg-card p-5">
-          <p className="text-sm text-muted-foreground">Seasons</p>
+          <p className="text-sm text-muted-foreground">{t("seasons")}</p>
           <p className="mt-2 font-semibold">
-            {show.number_of_seasons || "N/A"}
+            {show.number_of_seasons || t("na")}
           </p>
         </div>
 
         <div className="rounded-xl border bg-card p-5">
-          <p className="text-sm text-muted-foreground">Episodes</p>
+          <p className="text-sm text-muted-foreground">{t("episodes")}</p>
           <p className="mt-2 font-semibold">
-            {show.number_of_episodes || "N/A"}
+            {show.number_of_episodes || t("na")}
           </p>
         </div>
 
         <div className="rounded-xl border bg-card p-5">
-          <p className="text-sm text-muted-foreground">Status</p>
-          <p className="mt-2 font-semibold">{show.status || "N/A"}</p>
+          <p className="text-sm text-muted-foreground">{t("status")}</p>
+          <p className="mt-2 font-semibold">{show.status || t("na")}</p>
         </div>
 
         <div className="rounded-xl border bg-card p-5">
-          <p className="text-sm text-muted-foreground">Original Language</p>
+          <p className="text-sm text-muted-foreground">
+            {t("originalLanguage")}
+          </p>
           <p className="mt-2 font-semibold uppercase">
-            {show.original_language || "N/A"}
+            {show.original_language || t("na")}
           </p>
         </div>
 
         <div className="rounded-xl border bg-card p-5">
-          <p className="text-sm text-muted-foreground">Episode Runtime</p>
+          <p className="text-sm text-muted-foreground">{t("episodeRuntime")}</p>
           <p className="mt-2 font-semibold">
             {show.episode_run_time?.length
-              ? `${show.episode_run_time[0]} min`
-              : "N/A"}
+              ? `${show.episode_run_time[0]} ${t("minutes")}`
+              : t("na")}
           </p>
         </div>
 
         <div className="rounded-xl border bg-card p-5">
-          <p className="text-sm text-muted-foreground">Type</p>
-          <p className="mt-2 font-semibold">{show.type || "N/A"}</p>
+          <p className="text-sm text-muted-foreground">{t("type")}</p>
+          <p className="mt-2 font-semibold">{show.type || t("na")}</p>
         </div>
       </div>
 
-      {/* Networks */}
       {show.networks?.length > 0 && (
         <div className="mt-8">
-          <h3 className="mb-4 text-lg font-semibold">Networks</h3>
+          <h3 className="mb-4 text-lg font-semibold">{t("networks")}</h3>
 
           <div className="flex flex-wrap gap-3">
             {show.networks.map((network) => (
@@ -87,10 +93,11 @@ export default function TvShowMetadata({ show }) {
         </div>
       )}
 
-      {/* Production Companies */}
       {show.production_companies?.length > 0 && (
         <div className="mt-8">
-          <h3 className="mb-4 text-lg font-semibold">Production Companies</h3>
+          <h3 className="mb-4 text-lg font-semibold">
+            {t("productionCompanies")}
+          </h3>
 
           <div className="flex flex-wrap gap-3">
             {show.production_companies.map((company) => (
