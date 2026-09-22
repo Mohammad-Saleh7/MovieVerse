@@ -4,9 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-
 import SearchHeader from "./Search";
 import NavLinks from "./NavLinks";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -57,8 +57,9 @@ export default function Header() {
         </nav>
 
         {/* Desktop Search */}
-        <div className="hidden lg:flex">
+        <div className="hidden lg:flex gap-5">
           <SearchHeader />
+          <ThemeToggle />
         </div>
 
         {/* Mobile Menu Button */}
@@ -74,34 +75,47 @@ export default function Header() {
       </div>
 
       {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="mt-5 border-t pt-5 lg:hidden">
-          <nav className="flex flex-col gap-2">
-            <NavLinks mobile onNavigate={closeMenu} />
+      <div
+        className={`grid transition-[grid-template-rows] duration-500 ease-out lg:hidden ${
+          isMenuOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        }`}
+      >
+        <div className="min-h-0 overflow-hidden">
+          <div className="mt-5 border-t pt-5">
+            <nav className="flex flex-col gap-2">
+              <NavLinks mobile onNavigate={closeMenu} />
 
-            <Link
-              href="/profile"
-              onClick={closeMenu}
-              className="rounded-md border px-3 py-2 text-sm font-medium transition-colors hover:bg-accent"
-            >
-              Profile
-            </Link>
+              <Link
+                href="/profile"
+                onClick={closeMenu}
+                className="rounded-md border px-3 py-2 text-sm font-medium transition-colors hover:bg-accent"
+              >
+                Profile
+              </Link>
 
-            <Link
-              href="/login"
-              onClick={closeMenu}
-              className="rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
-            >
-              Login
-            </Link>
+              <Link
+                href="/login"
+                onClick={closeMenu}
+                className="rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              >
+                Login
+              </Link>
 
-            {/* Mobile Search */}
-            <div className="pt-2">
-              <SearchHeader />
-            </div>
-          </nav>
+              {/* Mobile Search */}
+              <div className="pt-2">
+                <SearchHeader />
+              </div>
+
+              {/* Mobile Theme */}
+              <div className="flex items-center justify-between rounded-md border px-3 py-2">
+                <span className="text-sm font-medium">Theme</span>
+
+                <ThemeToggle />
+              </div>
+            </nav>
+          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

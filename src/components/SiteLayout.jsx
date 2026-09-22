@@ -21,7 +21,7 @@ export default function SiteLayout({ children }) {
           <Header />
         </Suspense>
 
-        <main>{children}</main>
+        <main className="page-enter">{children}</main>
       </div>
 
       <Footer />

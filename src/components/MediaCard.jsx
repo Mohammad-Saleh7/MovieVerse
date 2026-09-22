@@ -26,14 +26,26 @@ export default function MediaCard({
       className="group block rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
     >
       <Card className="w-full max-w-xs gap-0 overflow-hidden p-0 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg">
-        <div className="relative aspect-[2/3] w-full overflow-hidden bg-muted">
+        <div className="group/poster relative aspect-[2/3] w-full overflow-hidden bg-muted">
           <Image
             src={poster || FALLBACK_POSTER}
             alt={`پوستر ${title}`}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 320px"
             priority={priority}
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            className="object-cover transition-transform duration-500 ease-out group-hover/poster:scale-105"
+          />
+
+          <div
+            className="
+      pointer-events-none
+      absolute inset-0
+      opacity-0
+      transition-opacity duration-500
+      group-hover/poster:opacity-100
+      dark:bg-[radial-gradient(circle_at_center,rgba(17,47,137,0.22),transparent_65%)]
+      bg-[radial-gradient(circle_at_center,rgba(49,92,255,0.12),transparent_65%)]
+    "
           />
         </div>
 

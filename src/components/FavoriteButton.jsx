@@ -50,9 +50,7 @@ export default function FavoriteButton({ movie }) {
       onClick={handleFavorite}
       className="mt-6"
     >
-      {isFavorite
-        ? `♥ ${itemTitle} Added to Favorites`
-        : `♡ Add ${itemTitle} to Favorites`}
+      {isFavorite ? `♥  Added to Favorites` : `♡ Add  to Favorites`}
     </Button>
   );
 }

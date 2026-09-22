@@ -38,7 +38,9 @@ export default function NavLinks({ mobile = false, onNavigate }) {
             className={
               mobile
                 ? `rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                    active ? "bg-accent text-primary" : "hover:bg-accent"
+                    active
+                      ? "bg-black text-white dark:bg-accent dark:text-primary"
+                      : "hover:bg-accent"
                   }`
                 : `transition-colors ${
                     active ? "font-semibold text-primary" : "hover:text-primary"

@@ -50,9 +50,7 @@ export default function WatchlistButton({ movie }) {
       onClick={handleWatchlist}
       className="mt-6"
     >
-      {isInWatchlist
-        ? `✓ ${itemTitle} Added to Watchlist`
-        : `+ Add ${itemTitle} to Watchlist`}
+      {isInWatchlist ? `✓  Added to Watchlist` : `+ Add  to Watchlist`}
     </Button>
   );
 }
