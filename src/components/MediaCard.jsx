@@ -39,7 +39,17 @@ export default function MediaCard({
             className="object-cover transition-transform duration-500 ease-out group-hover/poster:scale-105"
           />
 
-          <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover/poster:opacity-100 dark:bg-[radial-gradient(circle_at_center,rgba(17,47,137,0.22),transparent_65%)] bg-[radial-gradient(circle_at_center,rgba(49,92,255,0.12),transparent_65%)]" />
+          <div
+            className="
+              pointer-events-none
+              absolute inset-0
+              opacity-0
+              transition-opacity duration-500
+              group-hover/poster:opacity-100
+              dark:bg-[radial-gradient(circle_at_center,rgba(17,47,137,0.22),transparent_65%)]
+              bg-[radial-gradient(circle_at_center,rgba(49,92,255,0.12),transparent_65%)]
+            "
+          />
         </div>
 
         <CardContent className="space-y-2 p-4">
