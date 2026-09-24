@@ -2,6 +2,27 @@ import MediaCard from "@/components/media/MediaCard";
 import { getTrendingMovies } from "@/lib/tmdb";
 import { getLocale, getTranslations } from "next-intl/server";
 
+const metadataByLocale = {
+  en: {
+    title: "Trending Movies",
+  },
+  fa: {
+    title: "فیلم‌های ترند",
+  },
+};
+
+export async function generateMetadata() {
+  const locale = await getLocale();
+
+  const metadata = metadataByLocale[locale] || metadataByLocale.en;
+
+  return {
+    title: {
+      absolute: metadata.title,
+    },
+  };
+}
+
 export default async function TrendingPage() {
   const locale = await getLocale();
   const t = await getTranslations("trending");

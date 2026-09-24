@@ -10,10 +10,29 @@ const caveat = Caveat({
   variable: "--font-caveat",
 });
 
-export const metadata = {
-  title: "MovieVerse",
-  description: "MovieVerse - Movies and TV Shows",
+const metadataByLocale = {
+  en: {
+    title: "MovieVerse",
+    description: "Discover movies and TV shows you love.",
+  },
+  fa: {
+    title: "مووی ورس",
+    description: "فیلم‌ها و سریال‌های مورد علاقه‌تان را کشف کنید.",
+  },
 };
+
+export async function generateMetadata() {
+  const locale = await getLocale();
+
+  return {
+    title: {
+      default: metadataByLocale[locale]?.title || metadataByLocale.en.title,
+      template: `%s | MovieVerse`,
+    },
+    description:
+      metadataByLocale[locale]?.description || metadataByLocale.en.description,
+  };
+}
 
 export default async function RootLayout({ children }) {
   const locale = await getLocale();

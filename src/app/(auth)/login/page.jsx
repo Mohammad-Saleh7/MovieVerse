@@ -3,6 +3,16 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
+export async function generateMetadata() {
+  const t = await getTranslations("auth.login");
+
+  return {
+    title: {
+      absolute: t("title"),
+    },
+  };
+}
+
 export default async function LoginPage() {
   const t = await getTranslations("auth.login");
 

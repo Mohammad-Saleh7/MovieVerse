@@ -19,6 +19,48 @@ import HistoryTracker from "@/components/media/HistoryTracker";
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 const FALLBACK_POSTER = "/images/poster-placeholder.png";
 
+const metadataByLocale = {
+  en: {
+    fallbackDescription: "TV show details, cast, trailer and similar TV shows",
+  },
+  fa: {
+    fallbackDescription: "اطلاعات سریال، بازیگران، تریلر و سریال‌های مشابه",
+  },
+};
+
+export async function generateMetadata({ params }) {
+  const locale = await getLocale();
+  const { id } = await params;
+
+  const show = await getTvShowDetails(id, locale);
+
+  if (!show) {
+    return {
+      title: "TV Show",
+    };
+  }
+
+  const metadata = metadataByLocale[locale] || metadataByLocale.en;
+
+  const title = show.name || "TV Show";
+  const description = show.overview || metadata.fallbackDescription;
+
+  return {
+    title: {
+      absolute: title,
+    },
+    description,
+    openGraph: {
+      title,
+      description,
+      images: show.poster_path
+        ? [`${IMAGE_BASE_URL}/w500${show.poster_path}`]
+        : [],
+      type: "video.tv_show",
+    },
+  };
+}
+
 export default async function TvShowDetailsPage({ params }) {
   const locale = await getLocale();
   const t = await getTranslations("tvShowDetails");

@@ -19,6 +19,42 @@ import MediaCard from "../../../components/media/MediaCard";
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 const FALLBACK_POSTER = "/images/poster-placeholder.png";
 
+export async function generateMetadata({ params }) {
+  const locale = await getLocale();
+  const { id } = await params;
+
+  const movie = await getMovieDetails(id, locale);
+
+  if (!movie) {
+    return {
+      title: "Movie",
+    };
+  }
+
+  return {
+    title: {
+      absolute: movie.title || "Movie",
+    },
+    description:
+      movie.overview ||
+      (locale === "fa"
+        ? "اطلاعات فیلم، بازیگران، تریلر و فیلم‌های مشابه"
+        : "Movie details, cast, trailer and similar movies"),
+    openGraph: {
+      title: movie.title || "Movie",
+      description:
+        movie.overview ||
+        (locale === "fa"
+          ? "اطلاعات فیلم، بازیگران، تریلر و فیلم‌های مشابه"
+          : "Movie details, cast, trailer and similar movies"),
+      images: movie.poster_path
+        ? [`${IMAGE_BASE_URL}/w500${movie.poster_path}`]
+        : [],
+      type: "video.movie",
+    },
+  };
+}
+
 export default async function MovieDetailsPage({ params }) {
   const t = await getTranslations("movieDetails");
   const locale = await getLocale();

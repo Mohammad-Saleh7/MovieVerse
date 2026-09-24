@@ -2,6 +2,27 @@ import MediaCard from "@/components/media/MediaCard";
 import { getTopRatedMovies } from "@/lib/tmdb";
 import { getLocale, getTranslations } from "next-intl/server";
 
+const metadataByLocale = {
+  en: {
+    title: "Top Rated Movies",
+  },
+  fa: {
+    title: "فیلم‌های برتر",
+  },
+};
+
+export async function generateMetadata() {
+  const locale = await getLocale();
+
+  const metadata = metadataByLocale[locale] || metadataByLocale.en;
+
+  return {
+    title: {
+      absolute: metadata.title,
+    },
+  };
+}
+
 export default async function TopRatedPage() {
   const locale = await getLocale();
   const t = await getTranslations("topRated");

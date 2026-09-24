@@ -3,6 +3,40 @@ import { searchMovies, searchTvShows } from "@/lib/tmdb";
 import Pagination from "./components/Pagination";
 import { getLocale, getTranslations } from "next-intl/server";
 
+const metadataByLocale = {
+  en: {
+    title: "Search",
+    results: "Search results for",
+  },
+  fa: {
+    title: "جستجو",
+    results: "نتایج جستجو برای",
+  },
+};
+
+export async function generateMetadata({ searchParams }) {
+  const locale = await getLocale();
+  const params = await searchParams;
+
+  const query = params?.q?.trim() || "";
+
+  const metadata = metadataByLocale[locale] || metadataByLocale.en;
+
+  if (!query) {
+    return {
+      title: {
+        absolute: metadata.title,
+      },
+    };
+  }
+
+  return {
+    title: {
+      absolute: `${metadata.results} "${query}"`,
+    },
+  };
+}
+
 export default async function SearchPage({ searchParams }) {
   const t = await getTranslations("search");
   const locale = await getLocale();

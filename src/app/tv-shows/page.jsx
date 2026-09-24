@@ -1,9 +1,37 @@
-import TvShowGrid from "./components/TvShowGrid";
 import TvShowFilters from "./components/TvShowFilters";
+import TvShowGrid from "./components/TvShowGrid";
+import Pagination from "../../components/navigation/Pagination";
+
+import { getLocale, getTranslations } from "next-intl/server";
 
 import { getPopularTvShows, getTopRatedTvShows } from "@/lib/tmdb";
-import Pagination from "@/components/navigation/Pagination";
-import { getLocale, getTranslations } from "next-intl/server";
+
+const metadataByLocale = {
+  en: {
+    popular: "TV Shows",
+    topRated: "Top Rated TV Shows",
+  },
+  fa: {
+    popular: "سریال‌ها",
+    topRated: "سریال‌های برتر",
+  },
+};
+
+export async function generateMetadata({ searchParams }) {
+  const locale = await getLocale();
+  const params = await searchParams;
+
+  const category = params?.category || "popular";
+
+  const titles = metadataByLocale[locale] || metadataByLocale.en;
+  const title = titles[category] || titles.popular;
+
+  return {
+    title: {
+      absolute: title,
+    },
+  };
+}
 
 export default async function TvShowsPage({ searchParams }) {
   const t = await getTranslations("tvShows");

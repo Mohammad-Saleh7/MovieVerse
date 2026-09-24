@@ -11,6 +11,37 @@ import {
   getUpcomingMovies,
 } from "@/lib/tmdb";
 
+const metadataByLocale = {
+  en: {
+    popular: "Movies",
+    topRated: "Top Rated Movies",
+    nowPlaying: "Now Playing Movies",
+    upcoming: "Upcoming Movies",
+  },
+  fa: {
+    popular: "فیلم‌ها",
+    topRated: "فیلم‌های برتر",
+    nowPlaying: "فیلم‌های در حال اکران",
+    upcoming: "فیلم‌های آینده",
+  },
+};
+
+export async function generateMetadata({ searchParams }) {
+  const locale = await getLocale();
+  const params = await searchParams;
+
+  const category = params?.category || "popular";
+
+  const titles = metadataByLocale[locale] || metadataByLocale.en;
+  const title = titles[category] || titles.popular;
+
+  return {
+    title: {
+      absolute: title,
+    },
+  };
+}
+
 export default async function MoviesPage({ searchParams }) {
   const t = await getTranslations("movies");
   const locale = await getLocale();
