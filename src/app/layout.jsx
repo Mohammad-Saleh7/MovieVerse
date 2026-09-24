@@ -31,6 +31,11 @@ export async function generateMetadata() {
     },
     description:
       metadataByLocale[locale]?.description || metadataByLocale.en.description,
+    icons: {
+      icon: "/logo.png",
+      shortcut: "/logo.png",
+      apple: "/logo.png",
+    },
   };
 }
 
