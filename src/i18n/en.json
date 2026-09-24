@@ -189,5 +189,18 @@
     "posterAlt": "Movie poster",
     "noOverview": "No overview available.",
     "watchNow": "Watch Now"
+  },
+  "error": {
+    "title": "Something went wrong!",
+    "description": "We couldn't load this page right now.",
+    "tryAgain": "Try Again"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you're looking for doesn't exist.",
+    "backHome": "Back to Home"
+  },
+  "loading": {
+    "loading": "Loading..."
   }
 }

@@ -1,17 +1,17 @@
-"use client";
+﻿"use client";
 
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 
 export default function Error({ error, reset }) {
-  const t = useTranslations("error");
+  const t = useTranslations("auth.error");
 
   useEffect(() => {
     console.error(error);
   }, [error]);
 
   return (
-    <main className="flex min-h-[50vh] items-center justify-center py-10">
+    <main className="flex min-h-[70vh] items-center justify-center py-10">
       <section className="text-center">
         <h2 className="text-2xl font-bold">{t("title")}</h2>
 
