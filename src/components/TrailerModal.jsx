@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,17 +9,22 @@ import { useTranslations } from "next-intl";
 export default function TrailerModal({ trailerKey, title }) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [position, setPosition] = useState(null);
-  const buttonRef = useRef(null);
 
   const t = useTranslations("movieDetails");
 
   useEffect(() => {
     setMounted(true);
+
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, []);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      document.body.style.overflow = "";
+      return;
+    }
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
@@ -38,75 +43,55 @@ export default function TrailerModal({ trailerKey, title }) {
     };
   }, [open]);
 
-  const handleOpen = () => {
-    const rect = buttonRef.current?.getBoundingClientRect();
-    if (rect) {
-      setPosition({
-        top: rect.bottom + window.scrollY + 8, // کمی پایین‌تر از دکمه
-        left: rect.left + window.scrollX,
-      });
-    }
-    setOpen(true);
-  };
+  if (!trailerKey) {
+    return null;
+  }
 
-  if (!trailerKey) return null;
-
-  const modal = open ? (
+  const modal = (
     <div
-      className="fixed inset-0 z-[9999] bg-black/80"
-      onClick={() => setOpen(false)}
+      className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/80 p-4 sm:p-6"
       role="dialog"
       aria-modal="true"
       aria-label={`${title} trailer`}
+      onClick={() => setOpen(false)}
     >
       <div
-        className="absolute w-full max-w-5xl overflow-hidden rounded-xl bg-black shadow-2xl"
-        style={
-          position
-            ? {
-                top: position.top,
-                left: position.left,
-                // مطمئن شو از صفحه بیرون نمی‌زنه
-                maxWidth: `min(64rem, calc(100vw - ${position.left * 2}px))`,
-              }
-            : { top: "1.5rem", left: "50%", transform: "translateX(-50%)" }
-        }
+        className="relative w-full max-w-5xl overflow-hidden rounded-xl bg-black shadow-2xl"
         onClick={(event) => event.stopPropagation()}
       >
         <button
           type="button"
           onClick={() => setOpen(false)}
           aria-label={t("closeTrailer")}
-          className="absolute right-3 top-3 z-10 flex size-9 items-center justify-center rounded-full bg-black/70 text-white transition-colors hover:bg-black"
+          className="absolute right-3 top-3 z-20 flex size-10 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white transition-colors hover:bg-black"
         >
           <X className="size-5" />
         </button>
 
-        <div className="aspect-video w-full">
+        <div className="aspect-video w-full bg-black">
           <iframe
-            src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1`}
+            src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&rel=0`}
             title={`${title} trailer`}
-            className="block h-full w-full"
-            allow="autoplay; encrypted-media; picture-in-picture"
+            className="block h-full w-full border-0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           />
         </div>
       </div>
     </div>
-  ) : null;
+  );
 
   return (
     <>
       <Button
-        ref={buttonRef}
         type="button"
-        onClick={handleOpen}
+        onClick={() => setOpen(true)}
         className="cursor-pointer"
       >
         ▶ {t("watchTrailer")}
       </Button>
 
-      {mounted && createPortal(modal, document.body)}
+      {mounted && open && createPortal(modal, document.body)}
     </>
   );
 }
