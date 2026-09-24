@@ -1,6 +1,6 @@
 import "./globals.css";
-import SiteLayout from "@/components/SiteLayout";
-import ThemeProvider from "@/components/ThemeProvider";
+import SiteLayout from "@/components/layout/SiteLayout";
+import ThemeProvider from "../components/theme/ThemeProvider";
 import { Caveat } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";

@@ -1,4 +1,4 @@
-import MediaCard from "@/components/MediaCard";
+import MediaCard from "@/components/media/MediaCard";
 import { searchMovies, searchTvShows } from "@/lib/tmdb";
 import Pagination from "./components/Pagination";
 import { getLocale, getTranslations } from "next-intl/server";

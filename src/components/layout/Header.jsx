@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import SearchHeader from "./Search";
+import SearchHeader from "../navigation/Search";
 import NavLinks from "./NavLinks";
-import ThemeToggle from "./ThemeToggle";
-import LanguageToggle from "./LanguageToggle";
+import ThemeToggle from "../theme/ThemeToggle";
+import LanguageToggle from "../i18n/LanguageToggle";
 import { useTranslations } from "next-intl";
 
 export default function Header() {

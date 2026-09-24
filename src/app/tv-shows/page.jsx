@@ -2,7 +2,7 @@ import TvShowGrid from "./components/TvShowGrid";
 import TvShowFilters from "./components/TvShowFilters";
 
 import { getPopularTvShows, getTopRatedTvShows } from "@/lib/tmdb";
-import Pagination from "@/components/Pagination";
+import Pagination from "@/components/navigation/Pagination";
 import { getLocale, getTranslations } from "next-intl/server";
 
 export default async function TvShowsPage({ searchParams }) {

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import MediaCard from "@/components/MediaCard";
+import MediaCard from "@/components/media/MediaCard";
 
 export default function HistoryPage() {
   const [history, setHistory] = useState([]);

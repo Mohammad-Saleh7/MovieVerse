@@ -8,13 +8,13 @@ import {
   getMovieCredits,
 } from "@/lib/tmdb";
 
-import FavoriteButton from "../../../components/FavoriteButton";
-import WatchlistButton from "../../../components/WatchlistButton";
-import HistoryTracker from "@/components/HistoryTracker";
-import TrailerModal from "../../../components/TrailerModal";
-import CastList from "../../../components/CastList";
+import FavoriteButton from "../../../components/media/FavoriteButton";
+import WatchlistButton from "../../../components/media/WatchlistButton";
+import HistoryTracker from "@/components/media/HistoryTracker";
+import TrailerModal from "../../../components/media/TrailerModal";
+import CastList from "../../../components/media/CastList";
 import MovieMetadata from "../components/MovieMetadata";
-import MediaCard from "@/components/MediaCard";
+import MediaCard from "../../../components/media/MediaCard";
 
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 const FALLBACK_POSTER = "/images/poster-placeholder.png";

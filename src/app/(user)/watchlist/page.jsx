@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import MediaCard from "@/components/MediaCard";
+import MediaCard from "@/components/media/MediaCard";
 
 export default function WatchListPage() {
   const [watchlist, setWatchlist] = useState([]);

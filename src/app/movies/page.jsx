@@ -1,6 +1,6 @@
 import MovieFilters from "./components/MovieFilters";
 import MovieGrid from "./components/MovieGrid";
-import Pagination from "../../components/Pagination";
+import Pagination from "../../components/navigation/Pagination";
 
 import { getLocale, getTranslations } from "next-intl/server";
 
