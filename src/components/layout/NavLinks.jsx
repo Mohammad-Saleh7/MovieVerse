@@ -45,7 +45,9 @@ export default function NavLinks({ mobile = false, onNavigate }) {
                       : "hover:bg-accent"
                   }`
                 : `transition-colors ${
-                    active ? "font-semibold text-primary" : "hover:text-primary"
+                    active
+                      ? "font-bold text-primary text-2xl "
+                      : "hover:text-primary"
                   }`
             }
           >
