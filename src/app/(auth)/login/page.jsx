@@ -16,7 +16,7 @@ export default async function LoginPage() {
 
   return (
     <main className="flex min-h-[70vh] items-center justify-center py-10">
-      <div className="w-full max-w-md space-y-6">
+      <div className="w-full max-w-md space-y-6 px-4 sm:px-0">
         <div className="text-center">
           <h1 className="text-3xl font-bold">{t("title")}</h1>
 
