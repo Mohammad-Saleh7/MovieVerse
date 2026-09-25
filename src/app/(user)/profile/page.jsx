@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+
 import {
   Card,
   CardContent,
@@ -6,6 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
+import ProfileInfo from "./components/ProfileInfo";
 
 export default async function ProfilePage() {
   const t = await getTranslations("profile");
@@ -22,16 +25,13 @@ export default async function ProfilePage() {
             <CardDescription>{t("description")}</CardDescription>
           </CardHeader>
 
-          <CardContent className="space-y-4">
-            <div>
-              <p className="text-sm text-muted-foreground">{t("name")}</p>
-              <p className="font-medium">John Doe</p>
-            </div>
-
-            <div>
-              <p className="text-sm text-muted-foreground">{t("email")}</p>
-              <p className="font-medium">john@example.com</p>
-            </div>
+          <CardContent>
+            <ProfileInfo
+              labels={{
+                name: t("name"),
+                email: t("email"),
+              }}
+            />
           </CardContent>
         </Card>
       </section>

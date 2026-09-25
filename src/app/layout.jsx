@@ -4,6 +4,9 @@ import ThemeProvider from "../components/theme/ThemeProvider";
 import { Ubuntu } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import { Toaster } from "sonner";
+import { AuthProvider } from "../components/auth/AuthProvider";
+import AuthGate from "@/components/auth/AuthGate";
 const ubuntu = Ubuntu({
   subsets: ["latin"],
   variable: "--font-ubuntu",
@@ -55,7 +58,13 @@ export default async function RootLayout({ children }) {
       <body className="min-h-screen antialiased">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider>
-            <SiteLayout>{children}</SiteLayout>
+            <AuthProvider>
+              <AuthGate>
+                <SiteLayout>{children}</SiteLayout>
+              </AuthGate>
+
+              <Toaster position="top-center" richColors />
+            </AuthProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

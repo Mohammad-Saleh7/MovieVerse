@@ -1,12 +1,18 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
+
+import { useAuth } from "@/components/auth/AuthProvider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export default function RegisterForm() {
   const t = useTranslations("auth.register");
+  const router = useRouter();
+  const { register: registerUser } = useAuth();
 
   const {
     register,
@@ -15,7 +21,11 @@ export default function RegisterForm() {
   } = useForm();
 
   function onSubmit(data) {
-    console.log(data);
+    registerUser(data);
+
+    toast.success(t("welcome", { name: data.name }));
+
+    router.push("/");
   }
 
   return (

@@ -155,7 +155,12 @@
         "emailInvalid": "Please enter a valid email address.",
         "passwordRequired": "Password is required.",
         "passwordMinLength": "Password must be at least 6 characters."
-      }
+      },
+      "errors": {
+        "userNotFound": "No account found. Please register first.",
+        "invalidCredentials": "Email or password is incorrect."
+      },
+      "welcome": "Welcome, {name}! 👋"
     },
     "register": {
       "title": "Create Account",
@@ -176,7 +181,8 @@
         "emailInvalid": "Please enter a valid email address.",
         "passwordRequired": "Password is required.",
         "passwordMinLength": "Password must be at least 6 characters."
-      }
+      },
+      "welcome": "Welcome, {name}! 👋"
     }
   },
   "mediaCard": {

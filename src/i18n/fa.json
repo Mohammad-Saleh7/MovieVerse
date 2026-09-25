@@ -164,7 +164,12 @@
         "emailInvalid": "لطفاً یک ایمیل معتبر وارد کنید.",
         "passwordRequired": "وارد کردن رمز عبور الزامی است.",
         "passwordMinLength": "رمز عبور باید حداقل ۶ کاراکتر باشد."
-      }
+      },
+      "errors": {
+        "userNotFound": "حسابی پیدا نشد. لطفاً ابتدا ثبت‌نام کنید.",
+        "invalidCredentials": "ایمیل یا رمز عبور اشتباه است."
+      },
+      "welcome": "خوش اومدی، {name}! 👋"
     },
     "register": {
       "title": "ایجاد حساب کاربری",
@@ -185,7 +190,8 @@
         "emailInvalid": "لطفاً یک ایمیل معتبر وارد کنید.",
         "passwordRequired": "وارد کردن رمز عبور الزامی است.",
         "passwordMinLength": "رمز عبور باید حداقل ۶ کاراکتر باشد."
-      }
+      },
+      "welcome": "خوش اومدی، {name}! 👋"
     }
   },
   "mediaCard": {

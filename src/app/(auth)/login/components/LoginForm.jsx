@@ -1,21 +1,55 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
+
+import { useAuth } from "@/components/auth/AuthProvider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export default function LoginForm() {
   const t = useTranslations("auth.login");
+  const router = useRouter();
+
+  const { login } = useAuth();
 
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm();
 
   function onSubmit(data) {
-    console.log(data);
+    const result = login(data.email, data.password);
+
+    if (!result.success) {
+      if (result.error === "USER_NOT_FOUND") {
+        toast.error(t("errors.userNotFound"));
+
+        router.push("/register");
+        return;
+      }
+
+      if (result.error === "INVALID_CREDENTIALS") {
+        setError("password", {
+          type: "manual",
+          message: t("errors.invalidCredentials"),
+        });
+
+        return;
+      }
+    }
+
+    const storedUser = JSON.parse(
+      localStorage.getItem("movieverse-user") || "null",
+    );
+
+    toast.success(t("welcome", { name: storedUser?.name || "" }));
+
+    router.push("/");
   }
 
   return (
