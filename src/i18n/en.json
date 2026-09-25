@@ -149,7 +149,13 @@
       "passwordPlaceholder": "••••••••",
       "submit": "Login",
       "noAccount": "Don't have an account?",
-      "register": "Register"
+      "register": "Register",
+      "validation": {
+        "emailRequired": "Email is required.",
+        "emailInvalid": "Please enter a valid email address.",
+        "passwordRequired": "Password is required.",
+        "passwordMinLength": "Password must be at least 6 characters."
+      }
     },
     "register": {
       "title": "Create Account",
@@ -162,7 +168,15 @@
       "passwordPlaceholder": "••••••••",
       "submit": "Register",
       "hasAccount": "Already have an account?",
-      "login": "Login"
+      "login": "Login",
+      "validation": {
+        "nameRequired": "Name is required.",
+        "nameMinLength": "Name must be at least 2 characters.",
+        "emailRequired": "Email is required.",
+        "emailInvalid": "Please enter a valid email address.",
+        "passwordRequired": "Password is required.",
+        "passwordMinLength": "Password must be at least 6 characters."
+      }
     }
   },
   "mediaCard": {

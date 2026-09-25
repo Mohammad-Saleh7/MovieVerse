@@ -1,7 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import LoginForm from "./components/LoginForm";
 
 export async function generateMetadata() {
   const t = await getTranslations("auth.login");
@@ -27,44 +25,16 @@ export default async function LoginPage() {
           </p>
         </div>
 
-        <form className="space-y-4">
-          <div className="space-y-2">
-            <label htmlFor="email" className="text-sm font-medium">
-              {t("email")}
-            </label>
-
-            <Input
-              id="email"
-              type="email"
-              placeholder={t("emailPlaceholder")}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label htmlFor="password" className="text-sm font-medium">
-              {t("password")}
-            </label>
-
-            <Input
-              id="password"
-              type="password"
-              placeholder={t("passwordPlaceholder")}
-            />
-          </div>
-
-          <Button type="submit" className="w-full">
-            {t("submit")}
-          </Button>
-        </form>
+        <LoginForm />
 
         <p className="text-center text-sm text-muted-foreground">
           {t("noAccount")}{" "}
-          <Link
+          <a
             href="/register"
             className="font-medium text-primary hover:underline"
           >
             {t("register")}
-          </Link>
+          </a>
         </p>
       </div>
     </main>

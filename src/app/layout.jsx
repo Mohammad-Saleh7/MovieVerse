@@ -1,13 +1,13 @@
 import "./globals.css";
 import SiteLayout from "@/components/layout/SiteLayout";
 import ThemeProvider from "../components/theme/ThemeProvider";
-import { Caveat } from "next/font/google";
+import { Ubuntu } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
-
-const caveat = Caveat({
+const ubuntu = Ubuntu({
   subsets: ["latin"],
-  variable: "--font-caveat",
+  variable: "--font-ubuntu",
+  weight: ["300", "400", "500", "700"],
 });
 
 const metadataByLocale = {
@@ -50,7 +50,7 @@ export default async function RootLayout({ children }) {
       lang={locale}
       dir={isRTL ? "rtl" : "ltr"}
       suppressHydrationWarning
-      className={caveat.variable}
+      className={ubuntu.variable}
     >
       <body className="min-h-screen antialiased">
         <NextIntlClientProvider locale={locale} messages={messages}>

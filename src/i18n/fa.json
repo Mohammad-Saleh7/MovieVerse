@@ -156,7 +156,15 @@
       "passwordPlaceholder": "••••••••",
       "submit": "ورود",
       "noAccount": "حساب کاربری ندارید؟",
-      "register": "ثبت‌نام"
+      "register": "ثبت‌نام",
+      "validation": {
+        "nameRequired": "وارد کردن نام الزامی است.",
+        "nameMinLength": "نام باید حداقل ۲ کاراکتر باشد.",
+        "emailRequired": "وارد کردن ایمیل الزامی است.",
+        "emailInvalid": "لطفاً یک ایمیل معتبر وارد کنید.",
+        "passwordRequired": "وارد کردن رمز عبور الزامی است.",
+        "passwordMinLength": "رمز عبور باید حداقل ۶ کاراکتر باشد."
+      }
     },
     "register": {
       "title": "ایجاد حساب کاربری",
@@ -169,7 +177,15 @@
       "passwordPlaceholder": "••••••••",
       "submit": "ثبت‌نام",
       "hasAccount": "قبلاً حساب کاربری دارید؟",
-      "login": "ورود"
+      "login": "ورود",
+      "validation": {
+        "nameRequired": "وارد کردن نام الزامی است.",
+        "nameMinLength": "نام باید حداقل ۲ کاراکتر باشد.",
+        "emailRequired": "وارد کردن ایمیل الزامی است.",
+        "emailInvalid": "لطفاً یک ایمیل معتبر وارد کنید.",
+        "passwordRequired": "وارد کردن رمز عبور الزامی است.",
+        "passwordMinLength": "رمز عبور باید حداقل ۶ کاراکتر باشد."
+      }
     }
   },
   "mediaCard": {
